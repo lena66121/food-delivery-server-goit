@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 
 
 const signUpRoute = (req, res) => {
@@ -25,7 +24,13 @@ const signUpRoute = (req, res) => {
             );
             res.end();
         });
+    } else {
+        res.writeHead(405, {
+            "Content-Type": "text/html"
+        });
+        res.write("<h1>405 Method Not Allowed</h1>");
+        res.end();
     }
-  };
+};
 
-  module.exports = signUpRoute;
+module.exports = signUpRoute;
