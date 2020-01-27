@@ -7,12 +7,14 @@ const logger = morgan('combined');
 
 const port = 3000;
 
+const getRouteHandler = require('./helpers/getRouteHandler')
+
 const startServer = () => {
 
     const server = http.createServer((req, res) => {
 
         const parsedUrl = url.parse(req.url);
-        const func = router[parsedUrl.pathname] || router.default;
+        const func = getRouteHandler(router, parsedUrl.pathname) || router.default;
         logger(req, res, () => func(req, res));
 
     });
